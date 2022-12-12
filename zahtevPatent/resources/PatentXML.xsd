@@ -1,0 +1,69 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="Patent">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="metadata"/>
+                <xs:element name="BrojPrijave" type="xs:ID"/>
+                <xs:element name="DatumPrijema" type="xs:date"/>
+                <xs:element name="DatumPodnosenja" type="xs:date"/>
+                <xs:element name="NazivPronalaskaSrb" type="xs:string"/>
+                <xs:element name="NazivPronalaskaEng" type="xs:string"/>
+                <xs:element name="PodnosilacPrijave" type="TOsoba"/>
+                <xs:element name="PodnosilacFaks" type="xs:int"/>
+                <xs:element name="Drzavljanstvo" type="xs:string"/>
+                <xs:element name="OstaliPodnosioci" type="xs:boolean"/>
+                <xs:element name="Pronalazac" type="TOsoba"/>
+                <xs:element name="PronalazacFaks" type="xs:int"/>
+                <xs:element name="OstaliPronalazaci" type="xs:boolean"/>
+                <xs:element name="AdresaZaDostavljanje" type="TAdresa"/>
+                <xs:element name="NacinDostave" type="TNacinDostave"/>
+                <xs:element name="RanijePrijave" type="TRanijePrijave"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TOsoba">
+        <xs:sequence>
+            <xs:element name="ImePrezime" type="xs:string"/>
+            <xs:element name="Adresa" type="TAdresa"/>
+            <xs:element name="Telefon" type="xs:int"/>
+            <xs:element name="Email" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TAdresa">
+        <xs:sequence>
+            <xs:element name="Ulica" type="xs:string"/>
+            <xs:element name="Broj" type="xs:int"/>
+            <xs:element name="PostanskiBroj">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int">
+                        <xs:minInclusive value="-2147483648"/>
+                        <xs:totalDigits value="5"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Mesto" type="xs:string"/>
+            <xs:element name="Drzava" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TPunomocnik">
+        <xs:choice>
+            <xs:element name="Zastupanje" type="xs:boolean"/>
+            <xs:element name="PrijemPismena" type="xs:boolean"/>
+            <xs:element name="ZajednickiPredstavnik" type="xs:boolean"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="TNacinDostave">
+        <xs:choice>
+            <xs:element name="Elektronski" type="xs:boolean"/>
+            <xs:element name="Postom" type="xs:boolean"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="TRanijePrijave">
+        <xs:sequence>
+            <xs:element name="DatumPodnosenjaRanije" type="xs:date"/>
+            <xs:element name="BrojRanijePrijave" type="xs:int"/>
+            <xs:element name="Oznaka" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
